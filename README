@@ -1,0 +1,11 @@
+# PLUGWEB-675
+
+## Reproduction steps
+1. `mvn refapp:run -DskipTests`
+2. Go to [http://localhost:5990/refapp/plugins/servlet/bug](http://localhost:5990/refapp/plugins/servlet/bug)
+3. Open the developer console, should see two messages of `you should see this message twice in the console`
+4. Go to [http://localhost:5990/refapp/plugins/servlet/bug?2](http://localhost:5990/refapp/plugins/servlet/bug?2)
+5. Open the developer console, should see two messages of `you should see this message twice in the console`
+6. Modify the RefApp version in the [`pom.xml`](pom.xml) to use WRM v5 instead of v4
+7. `mvn clean refapp:run -DskipTests`
+8. Repeat 2-5

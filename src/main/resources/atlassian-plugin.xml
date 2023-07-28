@@ -1,0 +1,29 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="WRM Clientside racing serverside bug" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+
+    <servlet key="some-servlet" name="Page servlet" class="com.atlassian.wrm.servlet.PageServlet">
+        <url-pattern>/bug*</url-pattern>
+    </servlet>
+
+    <web-resource key="executed-twice" name="Resource loaded twice">
+        <description>This resource is loaded twice, once via the context, the other directly via the WR key</description>
+        <context>some-context</context>
+        <resource type="download" name="executed-twice.js" location="/js/executed-twice.js"/>
+    </web-resource>
+
+    <web-resource key="some-empty-resource" name="Secondary resource to enable context batching">
+        <description>This resource exists in the same context as the other as to trigger context batching</description>
+        <context>some-context</context>
+        <resource type="download" name="empty.js" location="/js/empty.js"/>
+    </web-resource>
+
+    <web-resource key="requires-executed-twice" name="Requires the executed twice dependency">
+        <description>Needs to be pulled in via the resource key because the WRM will bail it out</description>
+        <context>requires-executed-twice</context>
+        <resource type="download" name="requires-executed-twice.js" location="/js/requires-executed-twice.js"/>
+    </web-resource>
+</atlassian-plugin>
